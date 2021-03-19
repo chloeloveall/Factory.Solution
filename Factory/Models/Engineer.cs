@@ -35,7 +35,7 @@ namespace Factory.Models
     public EngineerState EngineerState { get; set; }
     [Required]
     [Display(Name="Postal Code")]
-    public int ClientZip { get; set; }
+    public int EngineerZip { get; set; }
     [Required]
     [Display(Name="Licenses & Certifications")]
     public string EngineerCerts { get; set; }
@@ -44,7 +44,8 @@ namespace Factory.Models
     public string EngineerBio { get; set; }
     [Display(Name="Hire Date")]
     public DateTime HireDate { get; set; }
-    public virtual ICollection<EngineerMachine> JoinEntities { get; set; }
+
+    public virtual ICollection<EngineerMachine> JoinEntities { get; }
   }
 
   public enum EngineerState
