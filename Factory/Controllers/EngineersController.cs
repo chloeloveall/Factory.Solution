@@ -1,7 +1,7 @@
 using Factory.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-// using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,8 +32,8 @@ namespace Factory.Controllers
     {
       if (ModelState.IsValid)
       {
-        // DateTime now = DateTime.Now;
-        // stylist.HireDate = now;
+        DateTime now = DateTime.Now;
+        engineer.HireDate = now;
         _db.Engineers.Add(engineer);
         _db.SaveChanges();
         return RedirectToAction("Index");
