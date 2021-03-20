@@ -12,34 +12,35 @@ namespace Factory.Models
     }
 
     public int EngineerId { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Please enter a name")]
     [Display(Name="Name")]
     public string EngineerName { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Please enter a phone number")]
     [DataType(DataType.PhoneNumber)]
     [Display(Name="Phone")]
     [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
     public string EngineerPhone { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Please enter an email")]
     [EmailAddress]
+    [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Not a valid email address")]
     [Display(Name="Email")]
     public string EngineerEmail { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Please enter an address")]
     [Display(Name="Street Address")]
     public string EngineerAddress { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Please enter a city")]
     [Display(Name="City")]
     public string EngineerCity { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Please select a state")]
     [Display(Name="State")]
     public EngineerState EngineerState { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Please enter a postal code")]
     [Display(Name="Postal Code")]
     public int EngineerZip { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Please select a certification level")]
     [Display(Name="Licenses & Certifications")]
     public string EngineerCerts { get; set; }
-    [Required]
+    [Required(ErrorMessage = "Please enter an engineer bio")]
     [Display(Name="Bio")]
     public string EngineerBio { get; set; }
     [Display(Name="Hire Date")]
