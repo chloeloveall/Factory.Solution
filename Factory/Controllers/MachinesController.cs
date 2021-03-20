@@ -17,22 +17,11 @@ namespace Factory.Controllers
       _db = db;
     }
 
-    // public ActionResult Index()
-    // {
-    //   return View(_db.Machines.ToList());
-    // }
-
     public ActionResult Index()
     {
       List<Machine> model = _db.Machines.ToList();
       return View(model);
     }
-
-    // public ActionResult Create()
-    // {
-    //   ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "EngineerName");
-    //   return View();
-    // }
 
     public ActionResult Create()
     {
@@ -100,6 +89,21 @@ namespace Factory.Controllers
       var thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
       ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "EngineerName");
       return View(thisMachine);
+    }
+
+    [HttpPost]
+    public ActionResult AddEngineer(Machine machine, int engineerId)
+    {
+      bool matches = _db.EngineerMachine.Any(x => x.MachineId == machine.MachineId && x.EngineerId == engineerId);
+      if(!matches)
+      {
+        if (engineerId != 0)
+        {
+          _db.EngineerMachine.Add(new EngineerMachine() { EngineerId = engineerId, MachineId = machine.MachineId });
+        }
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
 
   }
