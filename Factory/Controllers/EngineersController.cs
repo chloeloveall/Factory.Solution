@@ -91,5 +91,20 @@ namespace Factory.Controllers
       return View(thisEngineer);
     }
 
+    [HttpPost]
+    public ActionResult AddMachine(Engineer engineer, int machineId)
+    {
+      bool matches = _db.EngineerMachine.Any(x => x.EngineerId == engineer.EngineerId && x.MachineId == machineId);
+      if(!matches)
+      {
+        if (machineId != 0)
+        {
+          _db.EngineerMachine.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
+        }
+      }
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
   }
 }
