@@ -2,7 +2,6 @@
   Layout = "_Layout";
 }
 
-@using Factory.Models
 @model Factory.Models.Machine
 
 <h2>Edit</h2>
@@ -27,9 +26,6 @@
   @Html.LabelFor(model => model.MachineManufacturer)
   @Html.TextBoxFor(model => model.MachineManufacturer)
   @Html.ValidationMessageFor(model => model.MachineManufacturer, "", new { @class = "text-danger" })
-
-  @* @Html.Label("Select engineer")
-  @Html.DropDownList("EngineerId") *@
 
   <input type="submit" value="Save changes" />
 }
