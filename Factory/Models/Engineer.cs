@@ -47,7 +47,7 @@ namespace Factory.Models
     public int EngineerZip { get; set; }
 
     [Required(ErrorMessage = "Please select a certification level")]
-    [Display(Name="Licenses & Certifications")]
+    [Display(Name="Certifications")]
     public string EngineerCerts { get; set; }
 
     [Required(ErrorMessage = "Please enter an engineer bio")]
