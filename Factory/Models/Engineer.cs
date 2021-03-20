@@ -57,6 +57,10 @@ namespace Factory.Models
     [Display(Name="Hire Date")]
     public DateTime HireDate { get; set; }
 
+    [Required(ErrorMessage = "Please select engineer status")]
+    [Display(Name="Engineer Status")]
+    public string EngineerStatus { get; set; }
+
     public virtual ICollection<EngineerMachine> JoinEntities { get; }
   }
 
