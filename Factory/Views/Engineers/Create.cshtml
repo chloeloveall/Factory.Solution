@@ -52,6 +52,11 @@
   @Html.TextAreaFor(model => model.EngineerBio)
   @Html.ValidationMessageFor(model => model.EngineerBio, "", new { @class = "text-danger" })
 
+  @Html.LabelFor(model => model.EngineerStatus)
+  <span> Available </span> @Html.RadioButtonFor(model => model.EngineerStatus, "Available")
+  <span> Unavailable </span> @Html.RadioButtonFor(model => model.EngineerStatus, "Unavailable")
+  @Html.ValidationMessageFor(model => model.EngineerStatus, "", new { @class = "text-danger" })
+
   <input type="submit" value="Add new engineer" />
 }
 <p>@Html.ActionLink("Show all engineers", "Index")</p>
