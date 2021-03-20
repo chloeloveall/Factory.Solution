@@ -1,7 +1,7 @@
 using Factory.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
+// using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,9 +30,15 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult Create(Engineer engineer)
     {
-      _db.Engineers.Add(engineer);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
+      if (ModelState.IsValid)
+      {
+        // DateTime now = DateTime.Now;
+        // stylist.HireDate = now;
+        _db.Engineers.Add(engineer);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
+      return View(engineer);
     }
 
     public ActionResult Details(int id)
