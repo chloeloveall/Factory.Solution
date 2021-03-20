@@ -54,6 +54,10 @@ namespace Factory.Migrations
                     b.Property<int>("EngineerState")
                         .HasColumnType("int");
 
+                    b.Property<string>("EngineerStatus")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<int>("EngineerZip")
                         .HasColumnType("int");
 
