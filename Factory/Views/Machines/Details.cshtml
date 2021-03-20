@@ -1,0 +1,43 @@
+@{
+  Layout = "_Layout";
+}
+
+@* @using Factory.Models *@
+@model Factory.Models.Machine;
+
+<h2>Machine Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.MachineName): @Html.DisplayFor(model => model.MachineName)</h3>
+<p>@Html.DisplayNameFor(model => model.MachineDescription): @Html.DisplayFor(model => model.MachineDescription)</p>
+<p>@Html.DisplayNameFor(model => model.MachineManufacturer): @Html.DisplayFor(model => model.MachineManufacturer)</p>
+<p>@Html.DisplayNameFor(model => model.InstallationDate): @Html.DisplayFor(model => model.InstallationDate)</p>
+<p>@Html.DisplayNameFor(model => model.RepairDate): @Html.DisplayFor(model => model.RepairDate)</p>
+<p>@Html.DisplayNameFor(model => model.RepairedBy): @Html.DisplayFor(model => model.RepairedBy)</p>
+<p>@Html.DisplayNameFor(model => model.RepairLog): @Html.DisplayFor(model => model.RepairLog)</p>
+
+@* <h3>@Html.DisplayNameFor(model => model.StylistName): @ViewBag.thisStylist.StylistName<h3>
+<p>@Html.DisplayNameFor(model => model.StylistPhone): @ViewBag.thisStylist.StylistPhone</p>
+<p>@Html.DisplayNameFor(model => model.StylistEmail): @ViewBag.thisStylist.StylistEmail</p>
+<p>@Html.DisplayNameFor(model => model.StylistBio): @ViewBag.thisStylist.StylistBio</p>
+<p>@Html.DisplayNameFor(model => model.HireDate): @ViewBag.thisStylist.HireDate</p>
+<p>@Html.DisplayNameFor(model => model.Specialty): @ViewBag.thisStylist.Specialty</p> *@
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This machine is not regiistered with any engineers</p>
+}
+else
+{
+  <h4>Engineers certified to repair this machine:</h4>
+  <ul>
+  @foreach(var join in Model.JoinEntities)
+  {
+    <li>@join.Engineer.EngineerName</li>
+    @* <li>@Html.ActionLink($"{join.Machine.MachineName}", "Details", "Machines", new { id = machine.MachineId })</li> *@
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Back to machines", "Index")</p>
+<p>@Html.ActionLink("Edit Machine", "Edit", new { id = Model.MachineId })</p>
+<p>@Html.ActionLink("Delete Machine", "Delete", new { id = Model.MachineId })</p>
