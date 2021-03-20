@@ -1,8 +1,8 @@
 using Factory.Models;
 using Microsoft.AspNetCore.Mvc;
 // using Microsoft.AspNetCore.Mvc.Rendering;
-// using Microsoft.EntityFrameworkCore;
-// using System;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,6 +37,20 @@ namespace Factory.Controllers
     public ActionResult Create()
     {
       return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Machine machine)
+    {
+      if (ModelState.IsValid)
+      {  
+        DateTime now = DateTime.Now;
+        machine.InstallationDate = now;
+        _db.Machines.Add(machine);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
+      return View(machine);
     }
 
   }
