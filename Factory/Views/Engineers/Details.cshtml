@@ -2,8 +2,8 @@
   Layout = "_Layout";
 }
 
-@* @using Factory.Models *@
-@model Factory.Models.Engineer;
+@using Factory.Models
+@model Factory.Models.Engineer
 
 <h2>Engineer Details</h2>
 <hr />
@@ -19,13 +19,6 @@
 <p>@Html.DisplayNameFor(model => model.EngineerStatus): @Html.DisplayFor(model => model.EngineerStatus)</p>
 <p>@Html.DisplayNameFor(model => model.HireDate): @Html.DisplayFor(model => model.HireDate)</p>
 
-@* <h3>@Html.DisplayNameFor(model => model.StylistName): @ViewBag.thisStylist.StylistName<h3>
-<p>@Html.DisplayNameFor(model => model.StylistPhone): @ViewBag.thisStylist.StylistPhone</p>
-<p>@Html.DisplayNameFor(model => model.StylistEmail): @ViewBag.thisStylist.StylistEmail</p>
-<p>@Html.DisplayNameFor(model => model.StylistBio): @ViewBag.thisStylist.StylistBio</p>
-<p>@Html.DisplayNameFor(model => model.HireDate): @ViewBag.thisStylist.HireDate</p>
-<p>@Html.DisplayNameFor(model => model.Specialty): @ViewBag.thisStylist.Specialty</p> *@
-
 @if(@Model.JoinEntities.Count == 0)
 {
   <p>This engineer is not certified to work on any machines</p>
@@ -36,8 +29,7 @@ else
   <ul>
   @foreach(var join in Model.JoinEntities)
   {
-    <li>@join.Machine.MachineName</li>
-    @* <li>@Html.ActionLink($"{join.Machine.MachineName}", "Details", "Machines", new { id = machine.MachineId })</li> *@
+    <li>@Html.ActionLink($"{join.Machine.MachineName}", "Details", "Machines", new { id = join.Machine.MachineId })</li>
   }
   </ul>
 }
