@@ -27,6 +27,12 @@
   @Html.TextBoxFor(model => model.MachineManufacturer)
   @Html.ValidationMessageFor(model => model.MachineManufacturer, "", new { @class = "text-danger" })
 
+  @Html.LabelFor(model => model.MachineStatus)
+  <span> Operational </span> @Html.RadioButtonFor(model => model.MachineStatus, "Operational")
+  <span> Malfunctioning </span> @Html.RadioButtonFor(model => model.MachineStatus, "Malfunctioning")
+  <span> Out of Order </span> @Html.RadioButtonFor(model => model.MachineStatus, "Out of Order")
+  @Html.ValidationMessageFor(model => model.MachineStatus, "", new { @class = "text-danger" })
+
   <input type="submit" value="Save changes" />
 }
 <p>@Html.ActionLink("Show all machines", "Index")</p>
