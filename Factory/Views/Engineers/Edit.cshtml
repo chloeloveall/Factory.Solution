@@ -13,28 +13,38 @@
 {
   @Html.HiddenFor(model => model.EngineerId)
 
+  @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
   @Html.LabelFor(model => model.EngineerName)
   @Html.TextBoxFor(model => model.EngineerName)
+  @Html.ValidationMessageFor(model => model.EngineerName, "", new { @class = "text-danger" })
 
   @Html.LabelFor(model => model.EngineerPhone)
   @Html.TextBoxFor(model => model.EngineerPhone)
+  @Html.ValidationMessageFor(model => model.EngineerPhone, "", new { @class = "text-danger" })
 
   @Html.LabelFor(model => model.EngineerEmail)
   @Html.TextBoxFor(model => model.EngineerEmail)
+  @Html.ValidationMessageFor(model => model.EngineerEmail, "", new { @class = "text-danger" })
 
   @Html.LabelFor(model => model.EngineerAddress)
   @Html.TextBoxFor(model => model.EngineerAddress)
+  @Html.ValidationMessageFor(model => model.EngineerAddress, "", new { @class = "text-danger" })
 
   @Html.LabelFor(model => model.EngineerCity)
   @Html.TextBoxFor(model => model.EngineerCity)
+  @Html.ValidationMessageFor(model => model.EngineerCity, "", new { @class = "text-danger" })
 
   @Html.LabelFor(model => model.EngineerState)
   @Html.DropDownListFor(model => model.EngineerState, 
     new SelectList(Enum.GetValues(typeof(EngineerState))),
     "Select State")
+  @Html.ValidationMessageFor(model => model.EngineerState, "", new { @class = "text-danger" })
 
   @Html.LabelFor(model => model.EngineerZip)
   @Html.TextBoxFor(model => model.EngineerZip)
+  @Html.ValidationMessageFor(model => model.EngineerZip, "", new { @class = "text-danger" })
+
 
   @Html.LabelFor(model => model.EngineerCerts)
   <span> Level 1 Certification </span> @Html.RadioButtonFor(model => model.EngineerCerts, "Level 1")
@@ -42,10 +52,12 @@
   <span> Level 3 Certification </span> @Html.RadioButtonFor(model => model.EngineerCerts, "Level 3")
   <span> Level 4 Certification </span> @Html.RadioButtonFor(model => model.EngineerCerts, "Level 4")
   <span> Level 5 Certification </span> @Html.RadioButtonFor(model => model.EngineerCerts, "Level 5")
+  @Html.ValidationMessageFor(model => model.EngineerCerts, "", new { @class = "text-danger" })
 
   @Html.LabelFor(model => model.EngineerBio)
   @Html.TextAreaFor(model => model.EngineerBio)
+  @Html.ValidationMessageFor(model => model.EngineerBio, "", new { @class = "text-danger" })
 
-  <input type="submit" value="Save" />
+  <input type="submit" value="Save changes" />
 }
 <p>@Html.ActionLink("Back to list", "Index")</p>
