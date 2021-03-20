@@ -25,6 +25,10 @@ namespace Factory.Models
     [Display(Name="Manufacturer")]
     public string MachineManufacturer { get; set; }
 
+    [Required(ErrorMessage = "Please select machine status")]
+    [Display(Name="Machine Status")]
+    public string MachineStatus { get; set; }
+
     [Display(Name="Installation Date")]
     public DateTime InstallationDate { get; set; }
     
