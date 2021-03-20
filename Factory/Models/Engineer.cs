@@ -35,6 +35,7 @@ namespace Factory.Models
     [Display(Name="State")]
     public EngineerState EngineerState { get; set; }
     [Required(ErrorMessage = "Please enter a postal code")]
+    [RegularExpression(@"^(?(^00000(|-0000))|(\d{5}(|-\d{4})))$", ErrorMessage = "Not a valid postal code")]
     [Display(Name="Postal Code")]
     public int EngineerZip { get; set; }
     [Required(ErrorMessage = "Please select a certification level")]
