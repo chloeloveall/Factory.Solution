@@ -28,5 +28,16 @@ namespace Factory.Controllers
       return View(model);
     }
 
+    // public ActionResult Create()
+    // {
+    //   ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "EngineerName");
+    //   return View();
+    // }
+
+    public ActionResult Create()
+    {
+      return View();
+    }
+
   }
 }
