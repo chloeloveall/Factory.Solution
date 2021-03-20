@@ -68,5 +68,17 @@ namespace Factory.Controllers
       return View(thisMachine);
     }
 
+    [HttpPost]
+    public ActionResult Edit(Machine machine)
+    {
+      if (ModelState.IsValid)
+      {
+        _db.Entry(machine).State = EntityState.Modified;
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
+      return View(machine);
+    }
+
   }
 }
