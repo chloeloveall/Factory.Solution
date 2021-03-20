@@ -14,14 +14,19 @@
 {
   @Html.HiddenFor(model => model.MachineId)
 
+  @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
   @Html.LabelFor(model => model.MachineName)
   @Html.TextBoxFor(model => model.MachineName)
+  @Html.ValidationMessageFor(model => model.MachineName, "", new { @class = "text-danger" })
 
   @Html.LabelFor(model => model.MachineDescription)
   @Html.TextBoxFor(model => model.MachineDescription)
+  @Html.ValidationMessageFor(model => model.MachineDescription, "", new { @class = "text-danger" })
 
   @Html.LabelFor(model => model.MachineManufacturer)
   @Html.TextBoxFor(model => model.MachineManufacturer)
+  @Html.ValidationMessageFor(model => model.MachineManufacturer, "", new { @class = "text-danger" })
 
   @* @Html.Label("Select engineer")
   @Html.DropDownList("EngineerId") *@
