@@ -14,6 +14,7 @@ namespace Factory.Models
     public int EngineerId { get; set; }
     
     [Required(ErrorMessage = "Please enter a name")]
+    [RegularExpression(@"^[A-Za-z]+\s[A-Za-z]+$", ErrorMessage = "Please enter a valid first and last name")]
     [Display(Name="Name")]
     public string EngineerName { get; set; }
 
