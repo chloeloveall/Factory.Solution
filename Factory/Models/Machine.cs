@@ -12,18 +12,22 @@ namespace Factory.Models
     }
 
     public int MachineId { get; set; }
-    [Required]
-    [Display(Name="Name")]
+    
+    [Required(ErrorMessage = "Please enter a machine name")]
+    [Display(Name="Machine Name")]
     public string MachineName { get; set; }
-    [Required]
+
+    [Required(ErrorMessage = "Please enter a machine description")]
     [Display(Name="Description")]
     public string MachineDescription { get; set; }
-    [Required]
+
+    [Required(ErrorMessage = "Please enter the manufacturer")]
     [Display(Name="Manufacturer")]
     public string MachineManufacturer { get; set; }
-    // this needs to only be connected to the create - it will essentially time stamp when the entry is created 
-    [Display(Name="Purchase Date")]
-    public DateTime PurchaseDate { get; set; }
+
+    [Display(Name="Installation Date")]
+    public DateTime InstallationDate { get; set; }
+    
     // the repair sections can either be on a separate view or on the edit page - edit machine/add repair info
     [Display(Name="Last Repair Date")]
     public DateTime RepairDate { get; set; }
