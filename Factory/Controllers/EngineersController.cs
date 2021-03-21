@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Factory.Controllers
 {
@@ -113,6 +114,19 @@ namespace Factory.Controllers
       _db.EngineerMachine.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
+
+    public async Task<IActionResult> Search(string searchString)
+    {
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "EngineerName");
+      var search = from m in _db.Engineers
+        select m;
+
+      if (!String.IsNullOrEmpty(searchString))
+      {
+          search = search.Where(s => s.EngineerName.Contains(searchString));
+      }
+      return View(await Task.FromResult(search.ToList()));
     }
 
   }
