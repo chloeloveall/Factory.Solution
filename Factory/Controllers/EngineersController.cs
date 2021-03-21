@@ -129,5 +129,17 @@ namespace Factory.Controllers
       return View(await Task.FromResult(search.ToList()));
     }
 
+    public ActionResult CertLevel()
+    {
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "EngineerName", "EngineerCerts");
+      return View(_db.Engineers.OrderByDescending(m=>m.EngineerCerts).ToList());
+    }
+
+    // test below!!!!
+    public ActionResult Test()
+    {
+      return View();
+    }
+
   }
 }
