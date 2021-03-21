@@ -26,11 +26,6 @@
   else 
   {
     <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", new { id = engineer.EngineerId })</li>
-      @* @using (Html.BeginForm("Delete", "Recipes", FormMethod.Get))
-    {
-      @Html.Hidden("id", @recipe.RecipeId)
-      <input type="submit" value="Remove Recipe" class="btn btn-default"/>
-    } *@
   }
 }
 
