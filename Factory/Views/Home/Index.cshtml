@@ -30,72 +30,67 @@
       </p>
     </div>
   </section>
+
   <div class="container">
     <div class="row">
-      <div class="card-deck">
-        <div class="col-md-5 card-style">
-        <h3 class="card-title">Engineers</h3>
-          <div class="card mb-6 box-shadow">
-            <div class="card-body">
-              <p class="card-text">
-                @if (@Model["engineers"].Count == 0)
+      <div class="deck-flex card-deck">
+        <div class="card-flex card col-md-5 card-style-home">
+          <h3 class="card-title">Engineers</h3>
+          <div class="card-body">
+            @if (@Model["engineers"].Count == 0)
+            {
+              <h3>No engineers have been added yet!</h3>
+            } 
+            <ul>
+            @foreach(Engineer engineer in Model["engineers"])
+            {
+              <div class="pad-group">
+                <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", "Engineers", new { id = engineer.EngineerId })</li>
+                @if (@engineer.EngineerStatus == "Available")
                 {
-                  <h3>No engineers have been added yet!</h3>
-                } 
-
-                <ul>
-                @foreach(Engineer engineer in Model["engineers"])
-                {
-                  <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", "Engineers", new { id = engineer.EngineerId })</li>
-                  @if (@engineer.EngineerStatus == "Available")
-                  {
-                    <small><p>Status: <span class="available">@engineer.EngineerStatus</span></p></small>
-                  }
-                  else
-                  {
-                    <small><p>Status: <span class="unavailable">@engineer.EngineerStatus</span></p></small>
-                  }
+                  <small><p>Status: <span class="available">@engineer.EngineerStatus</span></p></small>
                 }
-                </ul>
-              </p>
-              <div class="d-flex justify-content-between align-items-center">
+                else
+                {
+                  <small><p>Status: <span class="unavailable">@engineer.EngineerStatus</span></p></small>
+                }
               </div>
-            </div>
+            }
+            </ul>
           </div>
         </div>
-        <div class="col-md-5 card-style">
-        <h3 class="card-title">Machines</h3>
-          <div class="card mb-6 box-shadow">
-            <div class="card-body">
-              <p class="card-text">
-                @if (@Model["machines"].Count == 0)
+        <div class="card-flex card col-md-5 card-style-home">
+          <h3 class="card-title">Machines</h3>
+          <div class="card-body">
+            @if (@Model["machines"].Count == 0)
+            {
+              <h3>No machines have been added yet!</h3>
+            }
+            <ul>
+            @foreach(Machine machine in Model["machines"])
+            {
+              <div class="pad-group">
+                <li>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId })</li>
+                @if (@machine.MachineStatus == "Operational")
                 {
-                  <h3>No machines have been added yet!</h3>
+                  <small><p>Status: <span class="available">@machine.MachineStatus</span></p></small>
                 }
-                <ul>
-                
-                @foreach(Machine machine in Model["machines"])
+                else if (@machine.MachineStatus == "Malfunctioning")
                 {
-                  <li>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId })</li>
-                  @if (@machine.MachineStatus == "Operational")
-                  {
-                    <small><p>Status: <span class="available">@machine.MachineStatus</span></p></small>
-                  }
-                  else if (@machine.MachineStatus == "Malfunctioning")
-                  {
-                    <small><p>Status: <span class="malfunction">@machine.MachineStatus</span></p></small>
-                  }
-                  else
-                  {
-                    <small><p>Status: <span class="unavailable">@machine.MachineStatus</span></p></small>
-                  }
+                  <small><p>Status: <span class="malfunction">@machine.MachineStatus</span></p></small>
                 }
-                </ul>
-              </p>
-            </div>
+                else
+                {
+                  <small><p>Status: <span class="unavailable">@machine.MachineStatus</span></p></small>
+                }
+              </div>
+            }
+            </ul>
           </div>
         </div>
-      <div>
+      </div>
     </div>
   </div>
 </main>
+
+
