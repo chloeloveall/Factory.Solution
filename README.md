@@ -134,7 +134,8 @@ As the factory manager, I need to add new engineers to our system when they are 
 
 ## Known Bugs
 
-* The animated header is not very responsive - it loads slowly and does not resize well. 
+* The animated header is not very responsive - it loads slowly and does not resize well
+* The search function branching statement is broken - it will not return "No results found" if there aren't any matches
 
 ## Issues 
 
