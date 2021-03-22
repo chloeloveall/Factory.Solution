@@ -2,13 +2,95 @@
   Layout = "_Layout";
 }
 
+@using Factory.Models
 @model Factory.Models.Engineer
 
-<h2>Are you sure you want to delete this engineer?</h2>
+<div class="container stylish-form">
+  @using (Html.BeginForm())
+  {
+    <h3>Add a New Engineer:</h3>
 
-@Html.DisplayNameFor(model => model.EngineerName): @Html.DisplayFor(model => model.EngineerName)
-@using (Html.BeginForm())
-{
-  <input type="submit" value="Delete" />
-}
-@Html.ActionLink("Back to List", "Index")
+    @Html.HiddenFor(model => model.EngineerId)
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    
+    <div class="form-row">
+      @Html.LabelFor(model => model.EngineerName)
+      @Html.TextBoxFor(model => model.EngineerName, new { placeholder = "First and Last Name", @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.EngineerName, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="row g-3">
+      <div class="col-sm-6">
+        @Html.LabelFor(model => model.EngineerPhone)
+        @Html.TextBoxFor(model => model.EngineerPhone, new { placeholder = "(999)999-9999", @class = "form-control col-5" })
+        @Html.ValidationMessageFor(model => model.EngineerPhone, "", new { @class = "text-danger" })
+      </div>
+      <div class="col-sm-6">
+        @Html.LabelFor(model => model.EngineerEmail)
+        @Html.TextBoxFor(model => model.EngineerEmail, new { placeholder = "email@address.com", @class = "form-control col" })
+        @Html.ValidationMessageFor(model => model.EngineerEmail, "", new { @class = "text-danger" })
+      </div>
+    </div>
+
+    <div class="form-row">
+      @Html.LabelFor(model => model.EngineerAddress)
+      @Html.TextBoxFor(model => model.EngineerAddress, new { placeholder = "Street Address", @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.EngineerAddress, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="row g-3">
+      <div class="col-sm-6">
+        @Html.LabelFor(model => model.EngineerCity)
+        @Html.TextBoxFor(model => model.EngineerCity, new { placeholder = "City", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EngineerCity, "", new { @class = "text-danger" })
+      </div>
+
+      <div class="col-sm-3">
+        @Html.LabelFor(model => model.EngineerState)
+        @Html.DropDownListFor(model => model.EngineerState, 
+          new SelectList(Enum.GetValues(typeof(EngineerState))),
+          "Select State",
+          new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EngineerState, "", new { @class = "text-danger" })
+      </div>
+
+      <div class="col-sm-3">
+        @Html.LabelFor(model => model.EngineerZip)
+        @Html.TextBoxFor(model => model.EngineerZip, new { placeholder = "99999", @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EngineerZip, "", new { @class = "text-danger" })
+      </div>
+    </div>
+
+    @Html.LabelFor(model => model.EngineerCerts)
+    <div class="form-check">
+      <span> Level 1 </span>
+      @Html.RadioButtonFor(model => model.EngineerCerts, "Level 1", new { @class = "form-check-input" }) 
+      <span class="radio-space"> Level 2 </span>
+      @Html.RadioButtonFor(model => model.EngineerCerts, "Level 2", new { @class = "form-check-input" }) 
+      <span class="radio-space"> Level 3 </span>
+      @Html.RadioButtonFor(model => model.EngineerCerts, "Level 3", new { @class = "form-check-input" }) 
+      <span class="radio-space"> Level 4 </span>
+      @Html.RadioButtonFor(model => model.EngineerCerts, "Level 4", new { @class = "form-check-input" }) 
+      <span class="radio-space"> Level 5 </span>
+      @Html.RadioButtonFor(model => model.EngineerCerts, "Level 5", new { @class = "form-check-input" }) 
+      @Html.ValidationMessageFor(model => model.EngineerCerts, "", new { @class = "text-danger" })
+    </div>
+
+    @Html.LabelFor(model => model.EngineerStatus)
+    <div class="form-check">
+      <span> Available </span> 
+      @Html.RadioButtonFor(model => model.EngineerStatus, "Available", new { @class = "form-check-input" })
+      <span class="radio-space"> Unavailable </span> @Html.RadioButtonFor(model => model.EngineerStatus, "Unavailable", new { @class = "form-check-input" })
+      @Html.ValidationMessageFor(model => model.EngineerStatus, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-row">
+      @Html.LabelFor(model => model.EngineerBio)
+      @Html.TextAreaFor(model => model.EngineerBio, new { rows = "10", @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.EngineerBio, "", new { @class = "text-danger" })
+    </div>
+
+    <input type="submit" class="btn btn-lg btn-warning form-btn" value="Delete" />
+  }
+</div>
