@@ -2,6 +2,100 @@
   Layout = "_Layout";
 }
 
-<h1>Factory Portal</h1>
-<p>@Html.ActionLink("See all machines", "Index", "Machines")</p> 
-<p>@Html.ActionLink("See all engineers", "Index", "Engineers")</p>
+@using Factory.Models
+
+<main role="main">
+
+  <section class="jumbotron text-center sillystringz">
+    <div class="container">
+      <div class="jumbotron-heading">
+        <svg viewBox="0 0">
+          <symbol id="s-text">
+            <text text-anchor="middle" x="50%" y="80%">SillyStringz</text>
+          </symbol>
+          <g class = "g-ants">
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+          </g>
+        </svg>
+      </div>
+      <span class="subhead"><h2>From the <span class="insanity">insane</span> mind of Dr. Sillystringz</h2></span>
+      <p class="lead text-muted">Welcome to the SillyStringz factory portal! Take a look around and add an engineer or two to our datatbase!</p>
+      <p>
+        <a href='/engineers' class="btn btn-warning btn-lg" role="button">Engineers Portal</a>
+        <a href='/machines' class="btn btn-warning btn-lg" role="button">Machines Portal</a>
+      </p>
+    </div>
+  </section>
+  <div class="container">
+    <div class="row">
+      <div class="card-deck">
+        <div class="col-md-5 card-style">
+        <h3 class="card-title">Engineers</h3>
+          <div class="card mb-6 box-shadow">
+            <div class="card-body">
+              <p class="card-text">
+                @if (@Model["engineers"].Count == 0)
+                {
+                  <h3>No engineers have been added yet!</h3>
+                } 
+
+                <ul>
+                @foreach(Engineer engineer in Model["engineers"])
+                {
+                  <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", "Engineers", new { id = engineer.EngineerId })</li>
+                  @if (@engineer.EngineerStatus == "Available")
+                  {
+                    <small><p>Status: <span class="available">@engineer.EngineerStatus</span></p></small>
+                  }
+                  else
+                  {
+                    <small><p>Status: <span class="unavailable">@engineer.EngineerStatus</span></p></small>
+                  }
+                }
+                </ul>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-5 card-style">
+        <h3 class="card-title">Machines</h3>
+          <div class="card mb-6 box-shadow">
+            <div class="card-body">
+              <p class="card-text">
+                @if (@Model["machines"].Count == 0)
+                {
+                  <h3>No machines have been added yet!</h3>
+                }
+                <ul>
+                
+                @foreach(Machine machine in Model["machines"])
+                {
+                  <li>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId })</li>
+                  @if (@machine.MachineStatus == "Operational")
+                  {
+                    <small><p>Status: <span class="available">@machine.MachineStatus</span></p></small>
+                  }
+                  else if (@machine.MachineStatus == "Malfunctioning")
+                  {
+                    <small><p>Status: <span class="malfunction">@machine.MachineStatus</span></p></small>
+                  }
+                  else
+                  {
+                    <small><p>Status: <span class="unavailable">@machine.MachineStatus</span></p></small>
+                  }
+                }
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      <div>
+    </div>
+  </div>
+</main>
