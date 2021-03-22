@@ -1,0 +1,32 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="container stylish-form">
+  <h3>Contact Us</h3>
+  <form action=”mailto:cloveall87@gmail.com” method=”POST” enctype=”multipart/form-data” name=”EmailForm”>
+    <div class="form-row">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="Name" Required>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-sm-6">
+        <label for="email">Email</label>
+        <input type="email" class="form-control col-6" id="email" placeholder="email@address.com" Required>
+      </div>
+
+      <div class="col-sm-6">
+        <label for="phone">Phone</label>
+        <input type="number" class="form-control col-6" id="phone" placeholder="(999)999-9999" Required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="comments">Comments</label>
+      <textarea class="form-control" id="comments" rows="3" Required></textarea>
+    </div>
+
+    <input type="submit" class="btn btn-lg btn-warning form-btn" value="Submit" />
+  </form>
+</div>
