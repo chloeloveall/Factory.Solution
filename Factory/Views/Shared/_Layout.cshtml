@@ -1,12 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Sillystringz Factory</title>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-    <link rel="stylesheet" href="~/css/styles.css">
-  </head>
-  <body>
-    @RenderBody()
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Sillystringz Factory</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="../../js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="~/css/styles.css">
+</head>
+<body>
+  <header id="topnav">
+    <div class="inner">
+      <div class="logo"><a href='/'>SillyStringz</a></div>
+      <nav role='navigation'>
+        <ul>
+          <li><a href="/home/about">About</a></li>
+          <li><a href="/engineers">Engineers</a></li>
+          <li><a href="/machines">Machines</a></li>
+          <li><a href="/home/contact">Contact Us</a></li>
+        </ul>
+      </nav>  
+    </div>
+  </header>
+  @RenderBody()
+  <footer>
+    <div class="container">
+      <div class="foot-align">
+        <p>Copyright &copy; <a href = "mailto: chloeloveall@protonmail.com">Chloe Loveall</a> 2021</p>
+        <p class="float-right"> <a href="#">Back to top</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
 </html>
