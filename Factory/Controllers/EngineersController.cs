@@ -125,8 +125,13 @@ namespace Factory.Controllers
       if (!String.IsNullOrEmpty(searchString))
       {
         search = search.Where(s => s.EngineerName.Contains(searchString));
+        return View(await Task.FromResult(search.ToList()));
       }
-      return View(await Task.FromResult(search.ToList()));
+      else
+      {
+        List<Engineer> model = _db.Engineers.ToList();
+        return View(_db.Engineers.OrderBy(m=>m.EngineerName).ToList());
+      }
     }
 
     public ActionResult CertLevel()
