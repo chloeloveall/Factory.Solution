@@ -21,7 +21,7 @@ namespace Factory.Controllers
     public ActionResult Index()
     {
       List<Engineer> model = _db.Engineers.ToList();
-      return View(model);
+      return View(_db.Engineers.OrderBy(m=>m.EngineerName).ToList());
     }
 
     public ActionResult Create()
@@ -133,12 +133,6 @@ namespace Factory.Controllers
     {
       ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "EngineerName", "EngineerCerts");
       return View(_db.Engineers.OrderByDescending(m=>m.EngineerCerts).ToList());
-    }
-
-    // test below!!!!
-    public ActionResult Test()
-    {
-      return View();
     }
 
   }
