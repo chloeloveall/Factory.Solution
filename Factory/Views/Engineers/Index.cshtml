@@ -4,19 +4,69 @@
 
 @using Factory.Models;
 
-<h1>Engineers</h1>
+<main role="main">
 
-@if (@Model.Count == 0)
-{
-  <h3>No engineers have been added yet!</h3>
-} 
+  <section class="jumbotron text-center sillystringz">
+    <div class="container">
+      <div class="jumbotron-heading">
+        <svg viewBox="0 0">
+          <symbol id="s-text">
+            <text text-anchor="middle" x="50%" y="80%">Engineers</text>
+          </symbol>
+          <g class = "g-ants">
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+          </g>
+        </svg>
+      </div>
+      <p class="lead text-muted">Engineers are sorted alphabetically, but you can also search by name or sort by certification level!</p>
+      <p>
+        <a href='/Engineers/Search' class="btn btn-warning btn-lg" role="button">Search by Name</a>
+        <a href='/Engineers/CertLevel' class="btn btn-warning btn-lg" role="button">View by Certification</a>
+        <a href='/Engineers/Create' class="btn btn-warning btn-lg" role="button">Add New Engineer</a>
+      </p>
+    </div>
+  </section>
+  <div class="container">
+    <div class="row">
+      @if (@Model.Count == 0)
+      {
+        <h3>No engineers have been added yet!</h3>
+      } 
 
-<ul>
-  @foreach(Engineer engineer in Model)
-  {
-    <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", new { id = engineer.EngineerId })</li>
-  }
-</ul>
-
-<p>@Html.ActionLink("Add new engineer", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+      @* <ul> *@
+        @foreach(Engineer engineer in Model)
+        {
+          <div class="col-md-4">
+            <div class="card-deck card-style">
+              <div class="card mb-4 box-shadow">
+                <h3 class="card-title">@engineer.EngineerName</h3>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                      <p><span class="bold">ID #:</span> @engineer.EngineerId</p>
+                      <p><span class="bold">Phone:</span> @engineer.EngineerPhone</p>
+                      <p><span class="bold">Email:</span> @engineer.EngineerEmail</p>
+                    <div class="container-sm">
+                      <button type="button" class="btn btn-warning">@Html.ActionLink($"View", "Details", new { id = engineer.EngineerId })</button>
+                      <button type="button" class="btn btn-warning">@Html.ActionLink($"Edit", "Edit", new { id = engineer.EngineerId })</button>
+                      <button type="button" class="btn btn-warning">@Html.ActionLink($"Delete", "Delete", new { id = engineer.EngineerId })</button>
+                    </div>
+                    @if (@engineer.EngineerStatus == "Available")
+                    {
+                      <small><p>Status: <span class="available">@engineer.EngineerStatus</span></p></small>
+                    }
+                    else
+                    {
+                      <small><p>Status: <span class="unavailable">@engineer.EngineerStatus</span></p></small>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+  </div>
+</main>
