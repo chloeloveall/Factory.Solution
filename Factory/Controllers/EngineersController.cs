@@ -124,7 +124,7 @@ namespace Factory.Controllers
 
       if (!String.IsNullOrEmpty(searchString))
       {
-          search = search.Where(s => s.EngineerName.Contains(searchString));
+        search = search.Where(s => s.EngineerName.Contains(searchString));
       }
       return View(await Task.FromResult(search.ToList()));
     }
