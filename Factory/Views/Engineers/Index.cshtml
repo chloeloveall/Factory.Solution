@@ -47,6 +47,7 @@
                       <p><span class="bold">ID #:</span> @engineer.EngineerId</p>
                       <p><span class="bold">Phone:</span> @engineer.EngineerPhone</p>
                       <p><span class="bold">Email:</span> @engineer.EngineerEmail</p>
+                      <p><span class="bold">Certification:</span> @engineer.EngineerCerts</p>
                     <div class="container-sm">
                       <button type="button" class="btn btn-warning">@Html.ActionLink($"View", "Details", new { id = engineer.EngineerId })</button>
                       <button type="button" class="btn btn-warning">@Html.ActionLink($"Edit", "Edit", new { id = engineer.EngineerId })</button>
