@@ -315,3 +315,7 @@ h3 {
 .bold a {
   font-weight: 800;
 }
+
+.logo a:hover {
+  color: #FDB731;
+}
