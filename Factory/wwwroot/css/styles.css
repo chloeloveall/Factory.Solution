@@ -11,6 +11,11 @@ body {
   color: #030321;
 }
 
+.wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
 .sillystringz {
   background: #030321;
 }
@@ -162,8 +167,9 @@ nav a:hover {
 }
 
 footer {
-  background-color: #BD0034;
+  bottom: 0px;
   margin-top: 4.1%;
+  background-color: #BD0034;
   padding: 25px;
   border-top: 2px solid #FDB731;
 }
@@ -197,20 +203,18 @@ a:hover {
   padding: 20px;
   border-radius: 8px;
   border: 3px solid #BD0034;
-  margin: 4.1%;
+  margin-bottom: 4.1%;
 }
 
-.card-deck-sort {
+.card-style-home {
   background-color: #FDB731;
   padding: 20px;
   border-radius: 8px;
   border: 3px solid #BD0034;
-  margin-top: 4%
+  margin: 4.1%;
+  display: block;
 }
 
-.bold {
-  font-weight: 800;
-}
 
 .available {
   font-weight: 800;
@@ -232,7 +236,10 @@ a:hover {
   padding: 20px;
   border-radius: 8px;
   border: 3px solid #BD0034;
-  margin: 4.1% auto;
+  margin-top: 4.1%;
+  margin-bottom: 4.1%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .form-control {
@@ -270,7 +277,8 @@ a:hover {
 
 h3 {
   text-align: center;
-  padding-bottom: 30px;
+  padding-bottom: 25px;
+  padding-top: 20px;
   font-weight: 500;
 } 
 
@@ -279,4 +287,31 @@ h3 {
   margin-left: 30px; 
   margin-right: 20px; 
   height: 50px;
+}
+
+.deck-flex{
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: row wrap; 
+  align-items: stretch;
+  margin-right: auto;
+  margin-left: auto;
+}
+.card-flex{
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  flex-basis: 42%;
+}
+
+.pad-group {
+  padding-bottom: 20px;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.bold a {
+  font-weight: 800;
 }
