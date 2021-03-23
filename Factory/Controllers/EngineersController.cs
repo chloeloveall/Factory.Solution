@@ -55,19 +55,24 @@ namespace Factory.Controllers
     public ActionResult Edit(int id)
     {
       var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
       return View(thisEngineer);
     }
-
+  
     [HttpPost]
-    public ActionResult Edit(Engineer engineer)
+    public ActionResult Edit(Engineer engineer, int machineId)
     {
-      if (ModelState.IsValid)
+      bool matches = _db.EngineerMachine.Any(x => x.EngineerId == engineer.EngineerId && x.MachineId == machineId);
+      if (!matches && ModelState.IsValid)
       {
-        _db.Entry(engineer).State = EntityState.Modified;
-        _db.SaveChanges();
-        return RedirectToAction("Index");
+        if (machineId != 0)
+        {
+          _db.EngineerMachine.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
+        }
       }
-      return View(engineer);
+      _db.Entry(engineer).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
     }
 
     public ActionResult Delete(int id)
@@ -85,28 +90,30 @@ namespace Factory.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult AddMachine(int id)
-    {
-      var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
-      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
-      return View(thisEngineer);
-    }
+    // the AddMachine POST/GET routes have been merged into the Edit routes
+    // this code is left here for instructor review in case the separate add route was required 
 
-    [HttpPost]
-    public ActionResult AddMachine(Engineer engineer, int machineId)
-    {
-      bool matches = _db.EngineerMachine.Any(x => x.EngineerId == engineer.EngineerId && x.MachineId == machineId);
-      if(!matches && ModelState.IsValid)
-      {
-        if (machineId != 0)
-        {
-          _db.EngineerMachine.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
-        }
-      }
-      _db.Entry(engineer).State = EntityState.Modified;
-      _db.SaveChanges();
-      return RedirectToAction("Index");
-    }
+    // public ActionResult AddMachine(int id)
+    // {
+    //   var thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+    //   ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "MachineName");
+    //   return View(thisEngineer);
+    // }
+
+    // [HttpPost]
+    // public ActionResult AddMachine(Engineer engineer, int machineId)
+    // {
+    //   bool matches = _db.EngineerMachine.Any(x => x.EngineerId == engineer.EngineerId && x.MachineId == machineId);
+    //   if(!matches)
+    //   {
+    //     if (machineId != 0)
+    //     {
+    //       _db.EngineerMachine.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
+    //     }
+    //   }
+    //   _db.SaveChanges();
+    //   return RedirectToAction("Index");
+    // }
 
     [HttpPost]
     public ActionResult DeleteMachine(int joinId)
