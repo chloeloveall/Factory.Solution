@@ -3,18 +3,73 @@
 }
 
 @using Factory.Models;
-@* @model List<Factory.Models.Machine>; *@
 
-<h1>Machines</h1>
+<main role="main">
 
-@if (@Model.Count == 0)
-{
-  <h3>No machines have been added yet!</h3>
-} 
-
-@foreach (Machine machine in Model)
-{
-  <li>@Html.ActionLink($"{machine.MachineName}", "Details", new { id = machine.MachineId })</li>
-}
-
-<p>@Html.ActionLink("Add new machine", "Create")</p>
+  <section class="jumbotron text-center sillystringz">
+    <div class="container">
+      <div class="jumbotron-heading">
+        <svg viewBox="0 0">
+          <symbol id="s-text">
+            <text text-anchor="middle" x="50%" y="80%">Machines</text>
+          </symbol>
+          <g class = "g-ants">
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+          </g>
+        </svg>
+      </div>
+      <p class="lead text-muted">Machines are sorted alphabetically, but you can also search by the machine name or last repair date!</p>
+      <p>
+        <a href='/Machines/Search' class="btn btn-warning btn-lg" role="button">Search by Name</a>
+        <a href='/Machines/CertLevel' class="btn btn-warning btn-lg" role="button">View by Last Repair</a>
+        <a href='/Machines/Create' class="btn btn-warning btn-lg" role="button">Add New Machine</a>
+      </p>
+    </div>
+  </section>
+  <div class="container">
+    <div class="row">
+      @if (@Model.Count == 0)
+      {
+        <h3>No machines have been added yet!</h3>
+      } 
+        @foreach(Machine machine in Model)
+        {
+          <div class="col-md-4">
+            <div class="card-deck card-style">
+              <div class="card mb-4 box-shadow">
+                <h3 class="card-title">@machine.MachineName</h3>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center">
+                      <p><span class="bold">Description:</span> @machine.MachineDescription</p>
+                      <p><span class="bold">Manufacturer:</span> @machine.MachineManufacturer</p>
+                      <p><span class="bold">InstallationDate:</span> @machine.InstallationDate</p>
+                      <p><span class="bold">Last Repaired:</span> @machine.RepairDate</p>
+                    <div class="container-sm">
+                      <button type="button" class="btn btn-warning">@Html.ActionLink($"View", "Details", new { id = machine.MachineId })</button>
+                      <button type="button" class="btn btn-warning">@Html.ActionLink($"Edit", "Edit", new { id = machine.MachineId })</button>
+                      <button type="button" class="btn btn-warning">@Html.ActionLink($"Delete", "Delete", new { id = machine.MachineId })</button>
+                    </div>
+                    @if (@machine.MachineStatus == "Operational")
+                    {
+                      <small><p>Status: <span class="available">@machine.MachineStatus</span></p></small>
+                    }
+                    else if (@machine.MachineStatus == "Malfunctioning")
+                    {
+                      <small><p>Status: <span class="malfunction">@machine.MachineStatus</span></p></small>
+                    }
+                    else
+                    {
+                      <small><p>Status: <span class="unavailable">@machine.MachineStatus</span></p></small>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+  </div>
+</main>
