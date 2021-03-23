@@ -53,9 +53,8 @@
     <h3>Add Engineer to Machine Profile</h3>
 
     <div class="form-row">
-      @* @Html.Label("Select Machine")
-      @Html.DropDownList("MachineId", (IEnumerable<SelectListItem>)ViewBag.MachineId, "Select Machine", new { @class = "form-control" })
-      @Html.ValidationMessageFor(model => model.EngineerState, "", new { @class = "text-danger" }) *@
+      @Html.Label("Select Engineer")
+      @Html.DropDownList("EngineerId", (IEnumerable<SelectListItem>)ViewBag.EngineerId, "Select Engineer", new { @class = "form-control" })
     </div>
 
     <input type="submit" class="btn btn-lg btn-warning form-btn" value="Save Changes" />
