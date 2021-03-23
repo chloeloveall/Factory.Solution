@@ -45,7 +45,7 @@
             @foreach(Engineer engineer in Model["engineers"])
             {
               <div class="pad-group">
-                <li>@Html.ActionLink($"{engineer.EngineerName}", "Details", "Engineers", new { id = engineer.EngineerId })</li>
+                <li><span class="bold">@Html.ActionLink($"{engineer.EngineerName}", "Details", "Engineers", new { id = engineer.EngineerId })</span></li>
                 @if (@engineer.EngineerStatus == "Available")
                 {
                   <small><p>Status: <span class="available">@engineer.EngineerStatus</span></p></small>
@@ -70,7 +70,7 @@
             @foreach(Machine machine in Model["machines"])
             {
               <div class="pad-group">
-                <li>@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId })</li>
+                <li><span class="bold">@Html.ActionLink($"{machine.MachineName}", "Details", "Machines", new { id = machine.MachineId })</span></li>
                 @if (@machine.MachineStatus == "Operational")
                 {
                   <small><p>Status: <span class="available">@machine.MachineStatus</span></p></small>
