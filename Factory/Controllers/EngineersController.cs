@@ -96,13 +96,14 @@ namespace Factory.Controllers
     public ActionResult AddMachine(Engineer engineer, int machineId)
     {
       bool matches = _db.EngineerMachine.Any(x => x.EngineerId == engineer.EngineerId && x.MachineId == machineId);
-      if(!matches)
+      if(!matches && ModelState.IsValid)
       {
         if (machineId != 0)
         {
           _db.EngineerMachine.Add(new EngineerMachine() { MachineId = machineId, EngineerId = engineer.EngineerId });
         }
       }
+      _db.Entry(engineer).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
