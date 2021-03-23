@@ -2,40 +2,41 @@
   Layout = "_Layout";
 }
 
-@model Factory.Models.Machine;
+<div class="container stylish-form">
 
-<h2>Machine Details</h2>
-<hr />
-<h3>@Html.DisplayNameFor(model => model.MachineName): @Html.DisplayFor(model => model.MachineName)</h3>
-<p>@Html.DisplayNameFor(model => model.MachineDescription): @Html.DisplayFor(model => model.MachineDescription)</p>
-<p>@Html.DisplayNameFor(model => model.MachineManufacturer): @Html.DisplayFor(model => model.MachineManufacturer)</p>
-<p>@Html.DisplayNameFor(model => model.MachineStatus): @Html.DisplayFor(model => model.MachineStatus)</p>
-<p>@Html.DisplayNameFor(model => model.InstallationDate): @Html.DisplayFor(model => model.InstallationDate)</p>
-<p>@Html.DisplayNameFor(model => model.RepairDate): @Html.DisplayFor(model => model.RepairDate)</p>
-<p>@Html.DisplayNameFor(model => model.RepairedBy): @Html.DisplayFor(model => model.RepairedBy)</p>
-<p>@Html.DisplayNameFor(model => model.RepairLog): @Html.DisplayFor(model => model.RepairLog)</p>
+  @model Factory.Models.Machine;
 
-@if(@Model.JoinEntities.Count == 0)
-{
-  <p>This machine is not regiistered with any engineers</p>
-}
-else
-{
-  <h4>Engineers certified to repair this machine:</h4>
-  <ul>
-  @foreach(var join in Model.JoinEntities)
+  <h2>Machine Details</h2>
+  <hr />
+  <h3>@Html.DisplayNameFor(model => model.MachineName): @Html.DisplayFor(model => model.MachineName)</h3>
+  <p>@Html.DisplayNameFor(model => model.MachineDescription): @Html.DisplayFor(model => model.MachineDescription)</p>
+  <p>@Html.DisplayNameFor(model => model.MachineManufacturer): @Html.DisplayFor(model => model.MachineManufacturer)</p>
+  <p>@Html.DisplayNameFor(model => model.MachineStatus): @Html.DisplayFor(model => model.MachineStatus)</p>
+  <p>@Html.DisplayNameFor(model => model.InstallationDate): @Html.DisplayFor(model => model.InstallationDate)</p>
+  <p>@Html.DisplayNameFor(model => model.RepairDate): @Html.DisplayFor(model => model.RepairDate)</p>
+  <p>@Html.DisplayNameFor(model => model.RepairedBy): @Html.DisplayFor(model => model.RepairedBy)</p>
+  <p>@Html.DisplayNameFor(model => model.RepairLog): @Html.DisplayFor(model => model.RepairLog)</p>
+
+  @if(@Model.JoinEntities.Count == 0)
   {
-    <li>@Html.ActionLink($"{join.Engineer.EngineerName}", "Details", "Engineers", new { id = join.Engineer.EngineerId })</li>
-    @using (Html.BeginForm("DeleteEngineer", "Machines"))
-    {
-      @Html.Hidden("joinId", @join.EngineerMachineId)
-      <input type="submit" value="Delete"/>
-    }
+    <p>This machine is not regiistered with any engineers</p>
   }
-  </ul>
-}
-
+  else
+  {
+    <h4>Engineers certified to repair this machine:</h4>
+    <ul>
+    @foreach(var join in Model.JoinEntities)
+    {
+      <li>@Html.ActionLink($"{join.Engineer.EngineerName}", "Details", "Engineers", new { id = join.Engineer.EngineerId })</li>
+      @using (Html.BeginForm("DeleteEngineer", "Machines"))
+      {
+        @Html.Hidden("joinId", @join.EngineerMachineId)
+        <input type="submit" value="Delete"/>
+      }
+    }
+    </ul>
+  }
 <p>@Html.ActionLink("Add an Engineer", "AddEngineer", new { id = Model.MachineId })</p>
-<p>@Html.ActionLink("Back to machines", "Index")</p>
 <p>@Html.ActionLink("Edit Machine", "Edit", new { id = Model.MachineId })</p>
 <p>@Html.ActionLink("Delete Machine", "Delete", new { id = Model.MachineId })</p>
+</div>
