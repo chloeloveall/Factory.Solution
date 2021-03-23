@@ -2,10 +2,10 @@
   Layout = "_Layout";
 }
 
-@using Factory.Models
+@* @using Factory.Models *@
 @model Factory.Models.Engineer
 
-<h2>Engineer Details</h2>
+@* <h2>Engineer Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.EngineerName): @Html.DisplayFor(model => model.EngineerName)</h3>
 <p>@Html.DisplayNameFor(model => model.EngineerPhone): @Html.DisplayFor(model => model.EngineerPhone)</p>
@@ -37,9 +37,70 @@ else
     }
   }
   </ul>
-}
+} *@
 
-<p>@Html.ActionLink("Add a Machine", "AddMachine", new { id = Model.EngineerId })</p>
-<p>@Html.ActionLink("Back to engineers", "Index")</p>
+@* <p>@Html.ActionLink("Add a Machine", "AddMachine", new { id = Model.EngineerId })</p>
 <p>@Html.ActionLink("Edit Engineer", "Edit", new { id = Model.EngineerId })</p>
-<p>@Html.ActionLink("Delete Engineer", "Delete", new { id = Model.EngineerId })</p>
+<p>@Html.ActionLink("Delete Engineer", "Delete", new { id = Model.EngineerId })</p> *@
+
+<div class="container stylish-form">
+  <h3>Engineer Details</h3>
+  <div class="row">
+    <div class="col-md-5">@Html.DisplayNameFor(model => model.EngineerName): @Html.DisplayFor(model => model.EngineerName)</div>
+    <div class="col-md-4">@Html.DisplayNameFor(model => model.EngineerId): @Html.DisplayFor(model => model.EngineerId)</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5">@Html.DisplayNameFor(model => model.EngineerPhone): @Html.DisplayFor(model => model.EngineerPhone)</div>
+    <div class="col-md-4">@Html.DisplayNameFor(model => model.EngineerEmail): @Html.DisplayFor(model => model.EngineerEmail)</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5">@Html.DisplayNameFor(model => model.EngineerAddress): @Html.DisplayFor(model => model.EngineerAddress)</div>
+    <div class="col-md-4">@Html.DisplayNameFor(model => model.EngineerCity): @Html.DisplayFor(model => model.EngineerCity)</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5">@Html.DisplayNameFor(model => model.EngineerState): @Html.DisplayFor(model => model.EngineerState)</div>
+    <div class="col-md-2">@Html.DisplayNameFor(model => model.EngineerZip): @Html.DisplayFor(model => model.EngineerZip)</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5">@Html.DisplayNameFor(model => model.EngineerCerts): @Html.DisplayFor(model => model.EngineerCerts)</div>
+    <div class="col-md-4">@Html.DisplayNameFor(model => model.HireDate): @Html.DisplayFor(model => model.HireDate)</div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">@Html.DisplayNameFor(model => model.EngineerBio): @Html.DisplayFor(model => model.EngineerBio)</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-5"><small>@Html.DisplayNameFor(model => model.EngineerStatus): @Html.DisplayFor(model => model.EngineerStatus)</small></div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      @if(@Model.JoinEntities.Count == 0)
+      {
+        <p>This engineer is not certified to work on any machines</p>
+      }
+      else
+      {
+        <h4>Machines this engineer is certified to repair:</h4>
+        <ul>
+        @foreach(var join in Model.JoinEntities)
+        {
+          <li>@Html.ActionLink($"{join.Machine.MachineName}", "Details", "Machines", new { id = join.Machine.MachineId })</li>
+          @using (Html.BeginForm("DeleteMachine", "Engineers"))
+          {
+            @Html.Hidden("joinId", @join.EngineerMachineId)
+            <input type="submit" class="btn btn-warning" value="Delete"/>
+            @* <button type="button" class="btn btn-warning">@Html.ActionLink($"View", "Details", new { id = engineer.EngineerId })</button> *@
+
+          }
+        }
+        </ul>
+      }
+    </div>
+  </div>
+</div>
