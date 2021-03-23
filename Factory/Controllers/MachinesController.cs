@@ -20,7 +20,7 @@ namespace Factory.Controllers
     public ActionResult Index()
     {
       List<Machine> model = _db.Machines.ToList();
-      return View(model);
+      return View(_db.Machines.OrderBy(m=>m.MachineName).ToList());
     }
 
     public ActionResult Create()
