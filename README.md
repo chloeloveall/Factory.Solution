@@ -148,6 +148,8 @@ for support and
 * Merge edit/delete functionality into a single view
 * Add ability to search by multiple search parameters
 * Add buttons to sort list by multiple criteria in single view 
+* Edit route resets HireDate to default value - tried to use Bind to exclude HireDate from Edit route, but I have not yet succeeded 
+* Add login/user auth
 
 ### Design
 
