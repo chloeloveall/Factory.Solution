@@ -8,7 +8,7 @@
 <div class="container stylish-form">
   @using (Html.BeginForm())
   {
-    <h3>Add a New Engineer:</h3>
+    <h3>Delete Engineer: @Html.DisplayFor(model => model.EngineerName)</h3>
 
     @Html.HiddenFor(model => model.EngineerId)
 
