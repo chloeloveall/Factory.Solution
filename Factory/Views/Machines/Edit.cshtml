@@ -4,35 +4,60 @@
 
 @model Factory.Models.Machine
 
-<h2>Edit</h2>
+<div class="container stylish-form">
+  @using (Html.BeginForm())
+  {
+    <h3>Edit Machine Profile: @Html.DisplayFor(model => model.MachineName)</h3>
 
-<h4>Edit this machine: @Html.DisplayFor(model => model.MachineName)</h4>
+    @Html.HiddenFor(model => model.MachineId)
 
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    
+      <div class="form-row">
+      @Html.LabelFor(model => model.MachineName)
+      @Html.TextBoxFor(model => model.MachineName, new { placeholder = "Machine Name", @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.MachineName, "", new { @class = "text-danger" })
+    </div>
 
-@using (Html.BeginForm())
-{
-  @Html.HiddenFor(model => model.MachineId)
+    <div class="row g-3">
+      <div class="col-sm-6">
+        @Html.LabelFor(model => model.MachineManufacturer)
+        @Html.TextBoxFor(model => model.MachineManufacturer, new { placeholder = "Manufacturer", @class = "form-control col-5" })
+        @Html.ValidationMessageFor(model => model.MachineManufacturer, "", new { @class = "text-danger" })
+      </div>
 
-  @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+      @* <div class="col-sm-6">
+        @Html.LabelFor(model => model.MachineModel)
+        @Html.TextBoxFor(model => model.MachineModel, new { placeholder = "Model or Model No.", @class = "form-control col" })
+        @Html.ValidationMessageFor(model => model.MachineModel, "", new { @class = "text-danger" })
+      </div> *@
+    </div>
 
-  @Html.LabelFor(model => model.MachineName)
-  @Html.TextBoxFor(model => model.MachineName)
-  @Html.ValidationMessageFor(model => model.MachineName, "", new { @class = "text-danger" })
+    @Html.LabelFor(model => model.MachineStatus)
+    <div class="form-check">
+      <span> Operational </span> 
+      @Html.RadioButtonFor(model => model.MachineStatus, "Operational", new { @class = "form-check-input" })
+      <span class="radio-space"> Malfunctioning </span> 
+      @Html.RadioButtonFor(model => model.MachineStatus, "Malfunctioning", new { @class = "form-check-input" })
+      <span class="radio-space"> Out of Order </span> 
+      @Html.RadioButtonFor(model => model.MachineStatus, "Out of Order", new { @class = "form-check-input" })
+      @Html.ValidationMessageFor(model => model.MachineStatus, "", new { @class = "text-danger" })
+    </div>
 
-  @Html.LabelFor(model => model.MachineDescription)
-  @Html.TextBoxFor(model => model.MachineDescription)
-  @Html.ValidationMessageFor(model => model.MachineDescription, "", new { @class = "text-danger" })
+    <div class="form-row">
+      @Html.LabelFor(model => model.MachineDescription)
+      @Html.TextAreaFor(model => model.MachineDescription, new { rows = "10", @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.MachineDescription, "", new { @class = "text-danger" })
+    </div>
 
-  @Html.LabelFor(model => model.MachineManufacturer)
-  @Html.TextBoxFor(model => model.MachineManufacturer)
-  @Html.ValidationMessageFor(model => model.MachineManufacturer, "", new { @class = "text-danger" })
+    <h3>Add Engineer to Machine Profile</h3>
 
-  @Html.LabelFor(model => model.MachineStatus)
-  <span> Operational </span> @Html.RadioButtonFor(model => model.MachineStatus, "Operational")
-  <span> Malfunctioning </span> @Html.RadioButtonFor(model => model.MachineStatus, "Malfunctioning")
-  <span> Out of Order </span> @Html.RadioButtonFor(model => model.MachineStatus, "Out of Order")
-  @Html.ValidationMessageFor(model => model.MachineStatus, "", new { @class = "text-danger" })
+    <div class="form-row">
+      @* @Html.Label("Select Machine")
+      @Html.DropDownList("MachineId", (IEnumerable<SelectListItem>)ViewBag.MachineId, "Select Machine", new { @class = "form-control" })
+      @Html.ValidationMessageFor(model => model.EngineerState, "", new { @class = "text-danger" }) *@
+    </div>
 
-  <input type="submit" value="Save changes" />
-}
-<p>@Html.ActionLink("Show all machines", "Index")</p>
+    <input type="submit" class="btn btn-lg btn-warning form-btn" value="Save Changes" />
+  }
+</div>
