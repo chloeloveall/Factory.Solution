@@ -8,7 +8,7 @@
 <div class="container stylish-form">
   @using (Html.BeginForm())
   {
-    <h3>Edit Engineer: @Html.DisplayFor(model => model.EngineerName)</h3>
+    <h3>Edit Engineer Profile: @Html.DisplayFor(model => model.EngineerName)</h3>
 
     @Html.HiddenFor(model => model.EngineerId)
 
@@ -89,6 +89,14 @@
       @Html.LabelFor(model => model.EngineerBio)
       @Html.TextAreaFor(model => model.EngineerBio, new { rows = "10", @class = "form-control" })
       @Html.ValidationMessageFor(model => model.EngineerBio, "", new { @class = "text-danger" })
+    </div>
+
+    <h3>Add Machine to Engineer Profile</h3>
+
+    <div class="form-row">
+      @Html.Label("Select Machine")
+      @Html.DropDownList("MachineId", (IEnumerable<SelectListItem>)ViewBag.MachineId, "Select Machine", new { @class = "form-control" })
+      @* @Html.ValidationMessageFor(model => model.EngineerState, "", new { @class = "text-danger" }) *@
     </div>
 
     <input type="submit" class="btn btn-lg btn-warning form-btn" value="Save Changes" />
