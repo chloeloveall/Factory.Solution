@@ -1,0 +1,64 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Factory.Models;
+@model List<Factory.Models.Machine>;
+
+<div class="wrapper">
+  <div class="container stack-width">
+    <div class="row stylish-form">
+      <h3>Search Machines by Name</h3>
+      <form asp-controller="MachinesController" asp-action="SearchBy" method="get">
+          <div class="form-row"></div>
+            <label for="search">Search:</label>
+            <input type="text" name="searchString" class="form-control"/>
+            <input type="submit" class="btn btn-lg btn-warning form-btn" value="Filter" />
+          </div>
+      </form>
+    </div>
+    
+  <div class="container">
+    <div class="row">
+      @if (@Model.Count == 0)
+      {
+        <h3>No results found!</h3>
+      } 
+
+      @foreach(Machine machine in Model)
+      {
+        <div class="col-md-4">
+          <div class="card-deck card-style">
+            <div class="card mb-4 box-shadow">
+              <h3 class="card-title">@machine.MachineName</h3>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <p><span class="bold">Manufacturer:</span> @machine.MachineManufacturer</p>
+                    <p><span class="bold">InstallationDate:</span> @machine.InstallationDate</p>
+                    <p><span class="bold">Last Repaired:</span> @machine.RepairDate</p>
+                  <div class="container-sm">
+                    <button type="button" class="btn btn-warning">@Html.ActionLink($"View", "Details", new { id = machine.MachineId })</button>
+                    <button type="button" class="btn btn-warning">@Html.ActionLink($"Edit", "Edit", new { id = machine.MachineId })</button>
+                    <button type="button" class="btn btn-warning">@Html.ActionLink($"Delete", "Delete", new { id = machine.MachineId })</button>
+                  </div>
+                  @if (@machine.MachineStatus == "Operational")
+                  {
+                    <small><p>Status: <span class="available">@machine.MachineStatus</span></p></small>
+                  }
+                  else if (@machine.MachineStatus == "Malfunctioning")
+                  {
+                    <small><p>Status: <span class="malfunction">@machine.MachineStatus</span></p></small>
+                  }
+                  else
+                  {
+                    <small><p>Status: <span class="unavailable">@machine.MachineStatus</span></p></small>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>
