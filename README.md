@@ -91,7 +91,8 @@ Installing .NET will provide provide access to the C# language
 
 #### MySQL Password Protection
 * Create a the following file: ```appsettings.json```
-* Add the following code:
+* Add the following code: 
+
   ![Setup of appsettings.json Screenshot](Factory/wwwroot/img/appsettings-screenshot.png)
 * **NOTE**: [YOUR_DATABASE] must match the database name you chose to import above
 * **NOTE**: [YOUR_PASSWORD] must match your local MySQL server password
@@ -107,11 +108,13 @@ Installing .NET will provide provide access to the C# language
 
 #### MySQL Workbench Database Import
 * Open ```MySQL Workbench``` and select ```Local Instance 3306```
-* In the ```Administration``` tab, select ```Data Import/Restore```
+* In the ```Administration``` tab, select ```Data Import/Restore``` 
+
 ![Data Import/Restore Screenshot](Factory/wwwroot/img/data-import-screenshot.png)
 * Select ```Import from Self-Contained File```
 * Select the file ```chloe_loveall.sql``` from the ```Factory.Solutions``` root directory
-* Select ```New``` from the ```Default Schema to be Imported To``` section
+* Select ```New``` from the ```Default Schema to be Imported To``` section 
+
 ![Default Schema Screenshot](Factory/wwwroot/img/default-schema-screenshot.png)
 * Choose a name for the database and select ```Ok```
 * Select ```Start Import```
