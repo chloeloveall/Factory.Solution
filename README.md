@@ -11,7 +11,6 @@
 
 ## Table of Contents
 
-
 1. [Table of Contents](#table-of-contents)
 2. [Description](#description)
 3. [Preview](#preview)
@@ -23,6 +22,8 @@
     * [Installation](#installation)
     * [Database Setup](#database-setup)
       * [MySQL Password Protection](#mysql-password-protection)
+      * [Entity Framework Core Database Setup](#entity-framework-core-database-setup)
+    * [Launching the Program](#launching-the-program)
 6. [User Stories](#user-stories)
 7. [Specifications](#specifications)
 8. [Known Bugs](#known-bugs)
@@ -80,34 +81,45 @@ Installing .NET will provide provide access to the C# language
     * To exit the REPL press: Ctrl +C
 
 ### Installation
-* Clone the repository with the following git terminal command: ```$ git clone https://github.com/chloeloveall/HairSalon.Solution.git```
+* Clone the repository with the following git terminal command: ```$ git clone https://github.com/chloeloveall/Factory.Solution.git```
 * Open the project directory in your terminal
-* Navigate to the ```HairSalon``` directory
-    * To create ```obj``` directories in both production and test projects, run the terminal command: ```$ dotnet restore```
-    * **NOTE**: Do not touch the code in either ```obj``` directory.
-* To launch the program, run the terminal command: ```dotnet run```
+* Navigate to the ```Factory``` directory (the production directory)
+    * To create an ```obj``` directory and install dependencies, run the terminal command: ```$ dotnet restore```
+    * **NOTE**: Do not touch the code in the ```obj``` directory.
 
 ### Database Setup 
-* Confirm you have [MySQL](https://dev.mysql.com/downloads/file/?id=484914) installed
-* Confirm you have [MySQL Workbench](https://dev.mysql.com/downloads/file/?id=484391) installed
-* Open ```MySQL Workbench``` and select ```Local Instance 3306```
-* In the ```Administration``` tab, select ```Data Import/Restore```
-  * ![Data Import/Restore Screenshot](HairSalon/wwwroot/img/data-import-screenshot.png)
-* Select ```Import from Self-Contained File```
-* Select the file ```chloe_loveall.sql``` from the ```HairSalon.Solutions``` root directory
-* Select ```New``` from the ```Default Schema to be Imported To``` section
-  * ![Default Schema Screenshot](HairSalon/wwwroot/img/default-schema-screenshot.png)
-* Choose a name for the database and select ```Ok```
-* Select ```Start Import```
 
 #### MySQL Password Protection
 * Create a the following file: ```appsettings.json```
 * Add the following code:
-  * ![Setup of appsettings.json Screenshot](HairSalon/wwwroot/img/appsettings-screenshot.png)
+  ![Setup of appsettings.json Screenshot](Factory/wwwroot/img/appsettings-screenshot.png)
 * **NOTE**: [YOUR_DATABASE] must match the database name you chose to import above
 * **NOTE**: [YOUR_PASSWORD] must match your local MySQL server password
 * **NOTE**: The ```appsettings.json``` file is included in the ```.gitignore``` file 
   * You can read more about best practices for storing private information with ASP.NET Core [here](https://www.humankode.com/asp-net-core/asp-net-core-configuration-best-practices-for-keeping-secrets-out-of-source-control)
+
+#### Entity Framework Core Database Import
+* Confirm you have [MySQL](https://dev.mysql.com/downloads/file/?id=484914) installed
+* Confirm you have [MySQL Workbench](https://dev.mysql.com/downloads/file/?id=484391) installed
+* From the production directory (Factory.Solution/Factory), run the following terminal command: ```dotnet ef migrations add Initial```
+* Then, also from the production directory, run this command: ```dotnet ef database update```
+* Open MySQL Workbench and verify that there is a new database with the database name you specified in the ```appsettings.json``` file
+
+#### MySQL Workbench Database Import
+* Open ```MySQL Workbench``` and select ```Local Instance 3306```
+* In the ```Administration``` tab, select ```Data Import/Restore```
+![Data Import/Restore Screenshot](Factory/wwwroot/img/data-import-screenshot.png)
+* Select ```Import from Self-Contained File```
+* Select the file ```chloe_loveall.sql``` from the ```Factory.Solutions``` root directory
+* Select ```New``` from the ```Default Schema to be Imported To``` section
+![Default Schema Screenshot](Factory/wwwroot/img/default-schema-screenshot.png)
+* Choose a name for the database and select ```Ok```
+* Select ```Start Import```
+
+### Launching the program
+* You are now ready to run the program! To launch the program, navigate to the production directory (Factory.Solution/Factory) and run the following terminal command: ```dotnet run```
+  * **NOTE**: You can alternately use ```dotnet watch run``` if you would like to make and view changes without needing to relaunch ```dotnet run```
+* In the browser of your choice, navigate to: ```http://localhost:5000/``` 
   
 ## User Stories
 
