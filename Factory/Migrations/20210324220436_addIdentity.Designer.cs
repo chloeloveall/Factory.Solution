@@ -3,14 +3,16 @@ using System;
 using Factory.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Factory.Migrations
 {
     [DbContext(typeof(FactoryContext))]
-    partial class FactoryContextModelSnapshot : ModelSnapshot
+    [Migration("20210324220436_addIdentity")]
+    partial class addIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,12 +190,7 @@ namespace Factory.Migrations
                     b.Property<string>("RepairedBy")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(255) CHARACTER SET utf8mb4");
-
                     b.HasKey("MachineId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Machines");
                 });
@@ -343,15 +340,6 @@ namespace Factory.Migrations
                     b.Navigation("Engineer");
 
                     b.Navigation("Machine");
-                });
-
-            modelBuilder.Entity("Factory.Models.Machine", b =>
-                {
-                    b.HasOne("Factory.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

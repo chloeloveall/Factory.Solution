@@ -7,22 +7,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+
 namespace Factory.Controllers
 {
+  [Authorize]
   public class MachinesController : Controller
   {
     private readonly FactoryContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public MachinesController(FactoryContext db)
+    public MachinesController(UserManager<ApplicationUser> userManager, FactoryContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-      List<Machine> model = _db.Machines.ToList();
-      return View(_db.Machines.OrderBy(m=>m.MachineName).ToList());
+    var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var currentUser = await _userManager.FindByIdAsync(userId);
+    List<Machine> model = _db.Machines.ToList();
+    return View(_db.Machines.OrderBy(m=>m.MachineName).ToList());
+    // var userItems = _db.Machines.Where(entry => entry.User.Id == currentUser.Id).ToList();
+    // return View(userItems);
     }
+
+    // public ActionResult Index()
+    // {
+    //   List<Machine> model = _db.Machines.ToList();
+    //   return View(_db.Machines.OrderBy(m=>m.MachineName).ToList());
+    // }
 
     public ActionResult Create()
     {
@@ -30,8 +47,14 @@ namespace Factory.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Machine machine)
+    // maybe add , int CategoryId to parameters?
+    public async Task<ActionResult> Create(Machine machine)
     {
+      var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      var currentUser = await _userManager.FindByIdAsync(userId);
+      machine.User = currentUser;
+      _db.Machines.Add(machine);
+      _db.SaveChanges();
       if (ModelState.IsValid)
       {  
         DateTime now = DateTime.Now;
@@ -42,6 +65,20 @@ namespace Factory.Controllers
       }
       return View(machine);
     }
+
+    // [HttpPost]
+    // public ActionResult Create(Machine machine)
+    // {
+    //   if (ModelState.IsValid)
+    //   {  
+    //     DateTime now = DateTime.Now;
+    //     machine.InstallationDate = now;
+    //     _db.Machines.Add(machine);
+    //     _db.SaveChanges();
+    //     return RedirectToAction("Index");
+    //   }
+    //   return View(machine);
+    // }
 
     public ActionResult Details(int id)
     {

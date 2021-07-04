@@ -3,6 +3,7 @@
 }
 
 @using Factory.Models;
+@model IEnumerable<Factory.Models.Machine>
 
 <main role="main">
 
@@ -32,43 +33,44 @@
   </section>
   <div class="container">
     <div class="row">
-      @if (@Model.Count == 0)
+      @if (@Model.Any())
+      @foreach(Machine machine in Model)
       {
-        <h3>No machines have been added yet!</h3>
-      } 
-        @foreach(Machine machine in Model)
-        {
-          <div class="col-md-4">
-            <div class="card-deck card-style">
-              <div class="card mb-4 box-shadow">
-                <h3 class="card-title">@machine.MachineName</h3>
-                <div class="card-body">
-                  <div class="d-flex justify-content-between align-items-center">
-                      <p><span class="bold">Manufacturer:</span> @machine.MachineManufacturer</p>
-                      <p><span class="bold">InstallationDate:</span> @machine.InstallationDate</p>
-                      <p><span class="bold">Last Repaired:</span> @machine.RepairDate</p>
-                    <div class="container-sm">
-                      <button type="button" class="btn btn-warning">@Html.ActionLink($"View", "Details", new { id = machine.MachineId })</button>
-                      <button type="button" class="btn btn-warning">@Html.ActionLink($"Edit", "Edit", new { id = machine.MachineId })</button>
-                      <button type="button" class="btn btn-warning">@Html.ActionLink($"Delete", "Delete", new { id = machine.MachineId })</button>
-                    </div>
-                    @if (@machine.MachineStatus == "Operational")
-                    {
-                      <small><p>Status: <span class="available">@machine.MachineStatus</span></p></small>
-                    }
-                    else if (@machine.MachineStatus == "Malfunctioning")
-                    {
-                      <small><p>Status: <span class="malfunction">@machine.MachineStatus</span></p></small>
-                    }
-                    else
-                    {
-                      <small><p>Status: <span class="unavailable">@machine.MachineStatus</span></p></small>
-                    }
+        <div class="col-md-4">
+          <div class="card-deck card-style">
+            <div class="card mb-4 box-shadow">
+              <h3 class="card-title">@machine.MachineName</h3>
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <p><span class="bold">Manufacturer:</span> @machine.MachineManufacturer</p>
+                    <p><span class="bold">InstallationDate:</span> @machine.InstallationDate</p>
+                    <p><span class="bold">Last Repaired:</span> @machine.RepairDate</p>
+                  <div class="container-sm">
+                    <button type="button" class="btn btn-warning">@Html.ActionLink($"View", "Details", new { id = machine.MachineId })</button>
+                    <button type="button" class="btn btn-warning">@Html.ActionLink($"Edit", "Edit", new { id = machine.MachineId })</button>
+                    <button type="button" class="btn btn-warning">@Html.ActionLink($"Delete", "Delete", new { id = machine.MachineId })</button>
                   </div>
+                  @if (@machine.MachineStatus == "Operational")
+                  {
+                    <small><p>Status: <span class="available">@machine.MachineStatus</span></p></small>
+                  }
+                  else if (@machine.MachineStatus == "Malfunctioning")
+                  {
+                    <small><p>Status: <span class="malfunction">@machine.MachineStatus</span></p></small>
+                  }
+                  else
+                  {
+                    <small><p>Status: <span class="unavailable">@machine.MachineStatus</span></p></small>
+                  }
                 </div>
               </div>
             </div>
           </div>
-        }
+        </div>
+      }
+      else 
+      {
+        <h3>No machines have been added yet!</h3>
+      }
   </div>
 </main>

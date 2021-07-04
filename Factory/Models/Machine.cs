@@ -12,6 +12,8 @@ namespace Factory.Models
     }
 
     public int MachineId { get; set; }
+
+    public virtual ApplicationUser User { get; set; }
     
     [Required(ErrorMessage = "Please enter a machine name")]
     [Display(Name="Machine Name")]
